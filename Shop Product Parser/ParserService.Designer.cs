@@ -1,6 +1,6 @@
 ﻿namespace Shop_Product_Parser
 {
-    partial class Service1
+    partial class ParserService
     {
         /// <summary> 
         /// Required designer variable.

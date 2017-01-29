@@ -14,12 +14,16 @@ namespace Shop_Product_Parser
         /// </summary>
         static void Main()
         {
+#if DEBUG
+            new ParserService().OnDebug();
+#else
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new Service1()
+                new ParserService()
             };
             ServiceBase.Run(ServicesToRun);
+#endif
         }
     }
 }
