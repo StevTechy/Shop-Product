@@ -10,16 +10,19 @@ namespace Shop_Product_Parser
 {
     class CsvReader
     {
-        public IEnumerable<Item> ReadFromFile<T>(string filePath, bool headerRow = false)
+        public IEnumerable<Item> ReadFromFile(string filePath, bool headerRow = false)
         {
-            //"X", "Y", "Z"
-            //"X1,"Y1",Z1"
+            //Get the list of lines from CSV
             var lines = File.ReadAllLines(filePath)
-                .SelectMany(a => a.Split(new char[] { ';', '\n' }, StringSplitOptions.RemoveEmptyEntries));
+                .SelectMany(a => a.Split(new char[] { ';', '\n' }, StringSplitOptions.RemoveEmptyEntries))
+                .Select(x => x.Replace(@"""", "").Trim());
 
-            lines = lines.Select(x => x.Replace(@"""", "").Trim());
+            //Remove header row if required
+            if (headerRow) lines = lines.Skip(1);
 
-            return lines.Select(x => new Item() { Name = x.Split(',')[0].Trim(),
+            //Format the lines into enumerable Items
+            return lines.Select(x => new Item() {
+                Name = x.Split(',')[0].Trim(),
                 Price = Convert.ToDouble(x.Split(',')[1]),
                 Currency = x.Split(',')[2].Trim(),
                 Stock = Convert.ToInt32(x.Split(',')[3])

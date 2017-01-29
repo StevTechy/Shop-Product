@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Products>
+  <Product Name="Clean Code" Price="29.99" Currency="$" Stock="50"/>
+  <Product Name="Another Book" Price="14.99" Currency="$" Stock="103"/>
+</Products> 

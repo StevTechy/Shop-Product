@@ -26,11 +26,34 @@ namespace Shop_Product_Parser
         protected override void OnStart(string[] args)
         {
             Trace.WriteLine("Parser Service has started");
+
+            //ParseCSV();
+            ParseXML();
+            ParseJSON();
+        }
+
+        private void ParseCSV()
+        {
             Console.WriteLine("Enter file name from CSV folder, file: Books - Batch #1.txt used by default");
 
             var userEnteredValue = string.IsNullOrEmpty(Console.ReadLine()) ? "Books - Batch #1.txt" : Console.ReadLine();
 
-            var items = new CsvReader().ReadFromFile<Item>(AppDomain.CurrentDomain.BaseDirectory + $@"CSV Files\{userEnteredValue}").ToList();
+            var items = new CsvReader().ReadFromFile(
+                AppDomain.CurrentDomain.BaseDirectory + $@"CSV Files\{userEnteredValue}", true).ToList();
+        }
+
+        private void ParseXML()
+        {
+            Console.WriteLine("Enter file name from XML folder, file: Books - 1.xml used by default");
+
+            var userEnteredValue = string.IsNullOrEmpty(Console.ReadLine()) ? "Books - 1.xml" : Console.ReadLine();
+
+            var items = new XmlReader().ReadFromFile<ItemContainer>(
+                AppDomain.CurrentDomain.BaseDirectory + $@"XML Files\{userEnteredValue}", true);
+        }
+
+        private void ParseJSON()
+        {
 
         }
 
