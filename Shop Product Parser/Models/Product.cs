@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 using System.Xml.Serialization;
 
 namespace Shop_Product_Parser.Models
 {
-    public class Item
+    public class Product
     {
         [XmlAttribute("Name")]
         public string Name { get; set; }
@@ -20,9 +16,9 @@ namespace Shop_Product_Parser.Models
     }
 
     [XmlRoot("Products")]
-    public class ItemContainer
+    public class ProductContainer
     {
-        [XmlElement("Product", Type = typeof(Item))]
-        public Item[] Items { get; set; }
+        [XmlElement("Product", Type = typeof(Product))]
+        public Product[] Products { get; set; }
     }
 }

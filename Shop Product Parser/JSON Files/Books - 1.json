@@ -1,0 +1,16 @@
+﻿{
+  "Products": [
+    {
+      "Name": "Clean Code",
+      "Price": "29.99",
+      "Currency": "$",
+      "Stock": "50"
+    },
+    {
+      "Name": "Another Book",
+      "Price": "14.99",
+      "Currency": "$",
+      "Stock": "103"
+    }
+  ]
+}

@@ -1,13 +1,9 @@
 ﻿using Shop_Product_Parser.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shop_Product_Parser
 {
@@ -27,7 +23,7 @@ namespace Shop_Product_Parser
         {
             Trace.WriteLine("Parser Service has started");
 
-            //ParseCSV();
+            ParseCSV();
             ParseXML();
             ParseJSON();
         }
@@ -48,13 +44,18 @@ namespace Shop_Product_Parser
 
             var userEnteredValue = string.IsNullOrEmpty(Console.ReadLine()) ? "Books - 1.xml" : Console.ReadLine();
 
-            var items = new XmlReader().ReadFromFile<ItemContainer>(
+            var itemContainer = new XmlReader().ReadFromFile<ProductContainer>(
                 AppDomain.CurrentDomain.BaseDirectory + $@"XML Files\{userEnteredValue}", true);
         }
 
         private void ParseJSON()
         {
+            Console.WriteLine("Enter file name from JSON folder, file: Books - 1.json used by default");
 
+            var userEnteredValue = string.IsNullOrEmpty(Console.ReadLine()) ? "Books - 1.json" : Console.ReadLine();
+
+            var items = new JsonReader().ReadFromFile<ProductContainer>(
+                AppDomain.CurrentDomain.BaseDirectory + $@"JSON Files\{userEnteredValue}");
         }
 
         protected override void OnStop()
