@@ -1,4 +1,5 @@
-﻿using Shop_Product_Parser.Models;
+﻿using Shop_Product.Data;
+using Shop_Product_Parser.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -34,8 +35,10 @@ namespace Shop_Product_Parser
 
             var userEnteredValue = string.IsNullOrEmpty(Console.ReadLine()) ? "Books - Batch #1.txt" : Console.ReadLine();
 
-            var items = new CsvReader().ReadFromFile(
+            var products = new CsvReader().ReadFromFile(
                 AppDomain.CurrentDomain.BaseDirectory + $@"CSV Files\{userEnteredValue}", true).ToList();
+
+            SaveProductsToDatabase(products);
         }
 
         private void ParseXML()
@@ -44,8 +47,10 @@ namespace Shop_Product_Parser
 
             var userEnteredValue = string.IsNullOrEmpty(Console.ReadLine()) ? "Books - 1.xml" : Console.ReadLine();
 
-            var itemContainer = new XmlReader().ReadFromFile<ProductContainer>(
+            var productContainer = new XmlReader().ReadFromFile<ProductContainer>(
                 AppDomain.CurrentDomain.BaseDirectory + $@"XML Files\{userEnteredValue}", true);
+
+            SaveProductsToDatabase(productContainer.Products);
         }
 
         private void ParseJSON()
@@ -54,8 +59,18 @@ namespace Shop_Product_Parser
 
             var userEnteredValue = string.IsNullOrEmpty(Console.ReadLine()) ? "Books - 1.json" : Console.ReadLine();
 
-            var items = new JsonReader().ReadFromFile<ProductContainer>(
+            var productContainer = new JsonReader().ReadFromFile<ProductContainer>(
                 AppDomain.CurrentDomain.BaseDirectory + $@"JSON Files\{userEnteredValue}");
+
+            SaveProductsToDatabase(productContainer.Products);
+        }
+
+        private void SaveProductsToDatabase(IEnumerable<Models.Product> products)
+        {
+            var shopConnection = new ShopConnection();
+
+            foreach (var product in products)
+                shopConnection.UpdateProduct(product.Name, Convert.ToDecimal(product.Price), product.Currency, product.Stock);
         }
 
         protected override void OnStop()
