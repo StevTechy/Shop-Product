@@ -86,7 +86,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CSV Files\Books - Batch #1.txt">
+    <Content Include="CSV Files\Books - 1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="XML Files\Books - 1.xml">

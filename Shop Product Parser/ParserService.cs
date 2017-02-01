@@ -31,9 +31,9 @@ namespace Shop_Product_Parser
 
         private void ParseCSV()
         {
-            Console.WriteLine("Enter file name from CSV folder, file: Books - Batch #1.txt used by default");
+            Console.WriteLine("Enter file name from CSV folder, file: Books - 1.txt used by default");
 
-            var userEnteredValue = string.IsNullOrEmpty(Console.ReadLine()) ? "Books - Batch #1.txt" : Console.ReadLine();
+            var userEnteredValue = string.IsNullOrEmpty(Console.ReadLine()) ? "Books - 1.txt" : Console.ReadLine();
 
             var products = new CsvReader().ReadFromFile(
                 AppDomain.CurrentDomain.BaseDirectory + $@"CSV Files\{userEnteredValue}", true).ToList();

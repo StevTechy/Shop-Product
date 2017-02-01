@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.25920.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop Product Parser", "Shop Product Parser\Shop Product Parser.csproj", "{1ED72975-AE68-4D74-99C9-22F7DB1C2998}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop Product.Parser", "Shop Product Parser\Shop Product.Parser.csproj", "{1ED72975-AE68-4D74-99C9-22F7DB1C2998}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop Product.Data", "Shop Product.Data\Shop Product.Data.csproj", "{082ECF53-13C6-4007-9365-DB436E3E4E18}"
 EndProject
