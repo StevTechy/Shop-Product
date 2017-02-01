@@ -1,48 +1,89 @@
-﻿@model List<Shop_Product.Data.Product>
+﻿@model IPagedList<Shop_Product.Data.Product>
+@using PagedList;
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Shop - Index";
 }
 
 <hr />
 
-@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
 {
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>
-                    <label class="control-label">Name</label>
-                </th>
-                <th>
-                    <label class="control-label">Price</label>
-                </th>
-                <th>
-                    <label class="control-label">Currency</label>
-                </th>
-                <th>
-                    <label class="control-label">Stock</label>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @{ foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @item.Name
-                        </td>
-                        <td>
-                            @item.Price
-                        </td>
-                        <td>
-                            @item.Currency
-                        </td>
-                        <td>
-                            @item.Stock
-                        </td>
-                    </tr>
-                }
+    <div class="row">
+        <div class="col-sm-4">
+            <label class="control-label">Name</label>
+            <input type="text" class="form-control" placeholder="Enter Name" name="name" />
+        </div>
+        @*<div class="col-md-3">
+                <label class="control-label">Price</label>
+                <input type="text" class="form-control" placeholder="Enter Price" name="price" />
+            </div>
+            <div class="col-md-2">
+                <label class="control-label">Currency</label>
+                <input type="text" class="form-control" placeholder="Enter Currency" name="currency" />
+            </div>
+            <div class="col-md-2">
+                <label class="control-label">Stock</label>
+                <input type="text" class="form-control" placeholder="Enter Stock" name="stock" />
+            </div>*@
+        <div class="col-sm-3">
+            <label class="control-label block">Click search to apply filters</label>
+            <button class="btn btn-default" type="submit">
+                Search
+                <span class="glyphicon glyphicon-search inline" aria-hidden="true"></span>
+            </button>
+            <a class="btn btn-default" href="@Url.Action("Index", "Home", new {  })">
+                Clear filters
+                <span class="glyphicon glyphicon-erase inline" aria-hidden="true"></span>
+            </a>
+        </div>
+    </div>
+}
+
+<hr />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                <label class="control-label">Name</label>
+            </th>
+            <th>
+                <label class="control-label">Price</label>
+            </th>
+            <th>
+                <label class="control-label">Currency</label>
+            </th>
+            <th>
+                <label class="control-label">Stock</label>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Price
+                    </td>
+                    <td>
+                        @item.Currency
+                    </td>
+                    <td>
+                        @item.Stock
+                    </td>
+                </tr>
             }
-        </tbody>
-    </table>
-                }
+        }
+    </tbody>
+</table>
+
+@if (Model.TotalItemCount > 0)
+{
+    <p>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+}
