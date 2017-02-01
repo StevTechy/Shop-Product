@@ -9,7 +9,9 @@
 
 namespace Shop_Product.Data
 {
-
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Product
     {
         public int Id { get; set; }

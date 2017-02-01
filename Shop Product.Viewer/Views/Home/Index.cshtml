@@ -1,0 +1,48 @@
+﻿@model List<Shop_Product.Data.Product>
+@{
+    ViewBag.Title = "Shop - Index";
+}
+
+<hr />
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    <label class="control-label">Name</label>
+                </th>
+                <th>
+                    <label class="control-label">Price</label>
+                </th>
+                <th>
+                    <label class="control-label">Currency</label>
+                </th>
+                <th>
+                    <label class="control-label">Stock</label>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.Price
+                        </td>
+                        <td>
+                            @item.Currency
+                        </td>
+                        <td>
+                            @item.Stock
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+                }
